@@ -1,1 +1,0 @@
-import './mapComponent.scss';

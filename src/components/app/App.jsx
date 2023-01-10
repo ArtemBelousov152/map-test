@@ -1,4 +1,5 @@
 import { Table } from 'antd';
+import MapComponent from '../mapComponent/MapComponent';
 
 import './App.scss';
 
@@ -40,11 +41,20 @@ const columns = [
     key: 'address',
   },
 ];
+let result;
+
+const getData = async () => {
+   await fetch('http://router.project-osrm.org/route/v1/driving/13.388860,52.517037;13.397634,52.529407;13.428555,52.523219?overview=false')
+   .then(res => res.json())
+   .then(res => result = res)
+   console.log(result);
+}
 
 function App() {
+  getData();
     return (
         <div className="App">
-            <Table 
+            {/* <Table 
                 rowSelection={
                     {
                         type:'radio',
@@ -59,7 +69,8 @@ function App() {
                         onClick: (e) => {console.log(record.key)}
                     }
                 }}
-            />
+              /> */}
+              <MapComponent/>
         </div>
     );
 }
