@@ -1,23 +1,59 @@
 import './mapComponent.scss';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
-
+import { TileLayer, Marker, Popup, useMap, Polyline } from 'react-leaflet'
+import { useAppSelector } from '../../hooks/redux';
 
 const MapComponent = () => {
-    return (
-        <div className='map__container'>
-            <MapContainer center={[51.505, -0.09]} zoom={10}>
-                <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <Marker position={[51.505, -0.09]}>
+    const { activeRequest, bound, rout } = useAppSelector(state => state.requestReducer)
+    const map = useMap();
+
+    const rendrerMarkers = () => {
+        if (activeRequest === null) {
+            return null;
+        }
+        const startData = [activeRequest.inLat, activeRequest.inLng]
+        const finishData = [activeRequest.outLat, activeRequest.outLng]
+        map.fitBounds(bound)
+
+        return (
+            <>
+                <Marker position={startData}>
                     <Popup>
-                    A pretty CSS3 popup. <br /> Easily customizable.
+                        Точка погрузки
                     </Popup>
                 </Marker>
-            </MapContainer>
-        </div>
+                <Marker position={finishData}>
+                    <Popup>
+                        Точка выгрузки
+                    </Popup>
+                </Marker>
+            </>
+        )
+    }
+
+    const renderRout = () => {
+        if (rout === null) {
+            return null;
+        }
+        return (
+
+            <Polyline pathOptions={{color: 'blue'}} positions={rout}/>
+
+            )
+
+    }
+
+    return (
+
+        <>
+            <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            {rendrerMarkers()}
+            {renderRout()}
+        </>
+
     )
-}   
+}
 
 export default MapComponent;
