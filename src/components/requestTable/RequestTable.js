@@ -1,7 +1,7 @@
 import { Table, Spin } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { requestSlice } from '../../store/reducers/requestSlice';
-import useHttp from '../../HTTP/useHttp';
+import useHttp from '../../hooks/useHttp';
 
 import './requestTable.scss';
 

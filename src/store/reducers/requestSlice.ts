@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IColumn, IRequest } from "../../models/redux";
+import { IColumn, IRequest } from "../../models/interfaces";
 import { v4 as uuidv4 } from 'uuid';
 
 interface requestState {
