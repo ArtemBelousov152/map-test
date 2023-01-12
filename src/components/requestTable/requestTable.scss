@@ -3,4 +3,8 @@
     grid-template-columns: repeat(1, auto);
     grid-template-rows: auto 100px;
     row-gap: 60px;
+    &__error {
+        color: red;
+        text-align: center;
+    }
 }

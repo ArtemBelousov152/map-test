@@ -6,7 +6,7 @@ import useHttp from '../../hooks/useHttp';
 import './requestTable.scss';
 
 const RequestTable = () => {
-    const { columns, requests, urlParams, urlPath, isLoading } = useAppSelector(state => state.requestReducer)
+    const { columns, requests, urlParams, urlPath, isLoading, error } = useAppSelector(state => state.requestReducer)
     const dispatch = useAppDispatch();
     const { setActiveRequest, getRequest } = requestSlice.actions
     const { request } = useHttp();
@@ -18,6 +18,18 @@ const RequestTable = () => {
         dispatch(getRequest(
             request(`${urlPath}${inLng},${inLat};${outLng},${outLat}?${urlParams}`)
         ))
+    }
+
+    const spinOrError = () => {
+        if (error) {
+            return <h2 className='table__error'>Что-то пошло не так</h2>
+        }
+        return (
+            <Spin 
+                tip='Загрузка'
+                size='large' 
+                spinning={isLoading}/>
+        )
     }
 
     return (
@@ -36,10 +48,7 @@ const RequestTable = () => {
                 columns={columns}
                 pagination={false}
             />
-            <Spin 
-                tip='Загрузка'
-                size='large' 
-                spinning={isLoading}/>
+            {spinOrError()}
         </div>
 
     )

@@ -12,6 +12,7 @@ interface requestState {
     rout: Array<number[]>;
     urlPath: string;
     urlParams: string;
+    error: boolean;
 }
 
 const initialState: requestState = {
@@ -90,7 +91,8 @@ const initialState: requestState = {
     bound: [],
     rout: [],
     urlParams: 'overview=false&steps=true&alternatives=true',
-    urlPath: 'https://router.project-osrm.org/route/v1/driving/'
+    urlPath: 'https://router.project-osrm.org/route/v1/driving/',
+    error: false
 }
 
 export const requestSlice = createSlice({
@@ -98,16 +100,20 @@ export const requestSlice = createSlice({
     initialState,
     reducers: {
         getRequest: (state) => {
-            state.isLoading = true
+            state.isLoading = true;
+            state.error = false;
         },
         setPolyline: (state, action: PayloadAction<Array<number[]>>) => {
-            state.rout = [[state.activeRequest.inLat, state.activeRequest.inLng], ...action.payload, [state.activeRequest.outLat, state.activeRequest.outLng]]
+            state.rout = [[state.activeRequest.inLat, state.activeRequest.inLng], ...action.payload, [state.activeRequest.outLat, state.activeRequest.outLng]];
             state.isLoading = false
         },
         setActiveRequest: (state, action: PayloadAction<IRequest>) => {
             state.activeRequest = action.payload;
-            state.bound = [[action.payload.inLat, action.payload.inLng], [action.payload.outLat, action.payload.outLng]]
+            state.bound = [[action.payload.inLat, action.payload.inLng], [action.payload.outLat, action.payload.outLng]];
         },
+        setError: (state) => {
+            state.error = true;
+        }
     }
 })
 
