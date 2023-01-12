@@ -9,7 +9,9 @@ interface requestState {
     activeRequest: any;
     center: number[];
     bound: Array<number[]>;
-    rout: any
+    rout: Array<number[]>;
+    urlPath: string;
+    urlParams: string;
 }
 
 const initialState: requestState = {
@@ -86,19 +88,20 @@ const initialState: requestState = {
     activeRequest: null,
     center: [50, 51],
     bound: [],
-    rout: null
+    rout: [],
+    urlParams: 'overview=false&steps=true&alternatives=true',
+    urlPath: 'https://router.project-osrm.org/route/v1/driving/'
 }
 
 export const requestSlice = createSlice({
     name: 'request',
     initialState,
     reducers: {
-        getRequest: (state, payload) => {
+        getRequest: (state) => {
             state.isLoading = true
         },
-        setPolyline: (state, action) => {
-            const result = [[state.activeRequest.inLat, state.activeRequest.inLng], ...action.payload, [state.activeRequest.outLat, state.activeRequest.outLng]]
-            state.rout = result
+        setPolyline: (state, action: PayloadAction<Array<number[]>>) => {
+            state.rout = [[state.activeRequest.inLat, state.activeRequest.inLng], ...action.payload, [state.activeRequest.outLat, state.activeRequest.outLng]]
             state.isLoading = false
         },
         setActiveRequest: (state, action: PayloadAction<IRequest>) => {
