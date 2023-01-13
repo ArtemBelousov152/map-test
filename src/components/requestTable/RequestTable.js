@@ -2,15 +2,24 @@ import { Table } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { requestSlice } from '../../store/reducers/requestSlice';
 import useHttp from '../../hooks/useHttp';
+import Error from '../error/Error';
 
 import './requestTable.scss';
-import LoadingOrError from '../loadingOrError/LoadingOrError';
 
 const RequestTable = () => {
-    const { columns, requests, urlParams, urlPath } = useAppSelector(state => state.requestReducer)
+    const { columns, requests, urlParams, urlPath, isLoading } = useAppSelector(state => state.requestReducer)
     const dispatch = useAppDispatch();
     const { setActiveRequest, getRequest } = requestSlice.actions
     const { request } = useHttp();
+
+    const tableSize = () => {
+        const widthScreen = window.innerWidth
+
+        if (widthScreen <= 800) {
+            return 'small'
+        } 
+        return 'large'
+    }
 
     const changeActiveRequest = (item) => {
         const { inLat, inLng, outLat, outLng } = item
@@ -33,11 +42,13 @@ const RequestTable = () => {
 
                         }
                     }}
+                loading={isLoading}
                 dataSource={requests}
                 columns={columns}
                 pagination={false}
+                size={tableSize()}
             />
-            <LoadingOrError />
+            <Error/>
         </div>
 
     )

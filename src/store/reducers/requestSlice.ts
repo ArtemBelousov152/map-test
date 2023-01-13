@@ -67,7 +67,7 @@ const initialState: requestState = {
         {
             title: 'Координаты ОТ lat',
             dataIndex: 'inLat',
-            key: 'inLar',
+            key: 'inLat',
         },
         {
             title: 'Координаты ОТ lng',
@@ -113,6 +113,7 @@ export const requestSlice = createSlice({
         },
         setError: (state) => {
             state.error = true;
+            state.isLoading = false;
         }
     }
 })
