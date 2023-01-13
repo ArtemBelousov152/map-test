@@ -12,7 +12,7 @@ const RequestTable = () => {
     const { request } = useHttp();
 
     const changeActiveRequest = (item) => {
-        const { inLat, inLng, outLat, outLng } = item   
+        const { inLat, inLng, outLat, outLng } = item
 
         dispatch(setActiveRequest(item))
         dispatch(getRequest(
@@ -25,10 +25,10 @@ const RequestTable = () => {
             return <h2 className='table__error'>Что-то пошло не так</h2>
         }
         return (
-            <Spin 
+            <Spin
                 tip='Загрузка'
-                size='large' 
-                spinning={isLoading}/>
+                size='large'
+                spinning={isLoading} />
         )
     }
 

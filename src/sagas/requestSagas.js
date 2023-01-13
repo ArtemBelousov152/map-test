@@ -10,7 +10,7 @@ function* workGetRequestFetch(actions) {
         })
 
         yield put(requestSlice.actions.setPolyline(steps))
-    } catch(e) {
+    } catch (e) {
         yield put(requestSlice.actions.setError())
     }
 }

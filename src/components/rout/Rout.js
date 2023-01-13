@@ -8,8 +8,8 @@ const Rout = () => {
         return null;
     }
     return (
-        <Polyline pathOptions={{color: 'blue'}} positions={rout}/>
-        )
+        <Polyline pathOptions={{ color: 'blue' }} positions={rout} />
+    )
 }
 
 export default Rout

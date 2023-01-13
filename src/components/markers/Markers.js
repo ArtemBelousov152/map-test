@@ -1,9 +1,9 @@
-import {Marker, Popup, useMap} from 'react-leaflet'
+import { Marker, Popup, useMap } from 'react-leaflet'
 
 import { useAppSelector } from "../../hooks/redux";
 
 const Markers = () => {
-    const { activeRequest, bound} = useAppSelector(state => state.requestReducer)
+    const { activeRequest, bound } = useAppSelector(state => state.requestReducer)
     const map = useMap();
 
     if (activeRequest === null) {
