@@ -1,5 +1,12 @@
 .App {
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
   padding-top: 100px;
+}
+
+@media (max-width: 1494px) {
+  .App {
+    padding-top: 30px
+  }
 }

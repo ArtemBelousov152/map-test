@@ -24,12 +24,6 @@ const RequestTable = () => {
         if (error) {
             return <h2 className='table__error'>Что-то пошло не так</h2>
         }
-        return (
-            <Spin
-                tip='Загрузка'
-                size='large'
-                spinning={isLoading} />
-        )
     }
 
     return (
@@ -44,9 +38,11 @@ const RequestTable = () => {
 
                         }
                     }}
+                loading={isLoading}
                 dataSource={requests}
                 columns={columns}
                 pagination={false}
+                size='small'
             />
             {spinOrError()}
         </div>
