@@ -42,7 +42,6 @@ const RequestTable = () => {
                 dataSource={requests}
                 columns={columns}
                 pagination={false}
-                size='small'
             />
             {spinOrError()}
         </div>
