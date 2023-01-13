@@ -2,7 +2,7 @@ import { Polyline } from 'react-leaflet'
 import { useAppSelector } from '../../hooks/redux';
 
 const Rout = () => {
-    const {rout } = useAppSelector(state => state.requestReducer)
+    const { rout } = useAppSelector(state => state.requestReducer)
 
     if (rout === null) {
         return null;
